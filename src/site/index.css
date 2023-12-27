@@ -1,72 +1,69 @@
-body{
-    margin:0;
-    padding:0;
-    background-color: #1e1e1e;
-    font-family: 'Menlo', 'Arial', sans-serif;
-    color: #d4d4d4;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1e1e1e;
+  font-family: "Menlo", "Arial", sans-serif;
+  color: #d4d4d4;
 }
 
 /* header */
 
 .header {
-    padding-top: 1.5rem;
-    height: 10vh;
-    transition: background-color 0.3s;
-    font-size: 2em;
+  padding-top: 1.5rem;
+  height: 10vh;
+  transition: background-color 0.3s;
+  font-size: 2em;
 }
 
 .header-btn {
-    font-family: Monospace, Menlo, Arial;
-    color:#D4D4D4;
-    text-align: center;
+  font-family: Monospace, Menlo, Arial;
+  color: #d4d4d4;
+  text-align: center;
 }
 .header-btn:hover {
-    background-color: #3a3a3a;
-    cursor: pointer;
+  background-color: #3a3a3a;
+  cursor: pointer;
 }
 
 /* home */
 
-.full{
-    background: #2c2c2c;
-    width:100vw;
-    padding-top: 1.5rem;
-    padding-bottom: 2.5rem;
+.full {
+  background: #2c2c2c;
+  width: 100vw;
+  padding-top: 1.5rem;
+  padding-bottom: 2.5rem;
 }
 
-.main{
-    margin: 1.5rem auto;
-    padding-top: 1em;
-    width: 80vw;
-    min-height: 100vh;
-    background: #3c3c3c;
-
+.main {
+  margin: 1.5rem auto;
+  padding-top: 1em;
+  width: 80vw;
+  min-height: 100vh;
+  background: #3c3c3c;
 }
-
 
 /* articles */
 
-
 .articleCard {
-    width: 80%;
-    height: 10rem;
-    margin: 2rem auto;
-    padding: 1em;
-    padding:auto;
-    border: #D4D4D4 1px solid;
-    box-shadow: inset;
+  width: 80%;
+  height: 10rem;
+  margin: 2rem auto;
+  padding: 1em;
+  padding: auto;
+  border: #d4d4d4 1px solid;
+  box-shadow: inset;
+  cursor: pointer;
 }
 
-.cover{
-
-    width: auto;
-    height: 100%;
-    max-height:100%;
-    max-width: 25%;
+.cover {
+  width: auto;
+  height: 100%;
+  max-height: 100%;
+  max-width: 25%;
 }
-.container  {
-    max-height: 100%;
-    max-width: 100%;
+.container {
+  max-height: 100%;
+  max-width: 100%;
 }
 
 /* aboutme */
