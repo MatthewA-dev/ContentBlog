@@ -4,11 +4,13 @@ function ArticleCard(props) {
   const data = props.data;
   return (
     <div className="articleCard" onClick={() => props.update(data)}>
+      <img className="coverCard" src={data.cover} />
       <div className="container">
         <div>
           <h1>{data.title}</h1>
-          <h3>{data.date}</h3>
-          <p>blah blah blah blah</p>
+          <h3>
+            {data.author} • {data.date}
+          </h3>
         </div>
       </div>
     </div>

@@ -53,17 +53,53 @@ body {
   border: #d4d4d4 1px solid;
   box-shadow: inset;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
 }
 
-.cover {
+.coverCard {
   width: auto;
   height: 100%;
   max-height: 100%;
   max-width: 25%;
+  object-fit: cover;
 }
 .container {
   max-height: 100%;
   max-width: 100%;
+  flex: 1;
+}
+
+.articleHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.coverImage {
+  max-width: 75%;
+}
+
+.title {
+  font-size: 4em;
+}
+
+.articleText {
+  font-size: 1.4em;
+  max-width: 80%;
+  margin-top: 0.6em;
+  margin-bottom: 0;
+  line-height: 2em;
+  text-indent: 4em;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* aboutme */

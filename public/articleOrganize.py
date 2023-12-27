@@ -21,21 +21,27 @@ if (not parsed.is_dir()):
 for file in main.iterdir():
     soup = BeautifulSoup((file / "main.html").read_text(), "html.parser")
     date = soup.find(name="head").find("date").attrs
+
     # parse individual line breaks as different paragraphs
     body = soup.find(name="body").decode_contents()
-    body = body.replace("\r", "").split("\n")
+    body = body.replace("\r", "").split("\n\n")
     body_new = ""
-
     for line in body:
         if (line == ""):
             continue
-        body_new += f"<p>{line}</p>"
-    articles.append({"title": soup.find(name="head").find("title").text,  # swap their parent directories
+        temp = line.replace('\n', '')
+        body_new += f"<p>{temp}</p>"
+
+    # generate object
+    articles.append({"title": soup.find(name="head").find("title").text,
+                     # swap their parent directories
                      "cover": str((file.parents[1] / "articles_parsed" / file.name / soup.find(name="head").find("cover").attrs["src"])),
                      "main": str(file.parents[1] / "articles_parsed" / file.name / "main.html"),
                      "date": datetime.date(int(date["year"]),
                                            int(date["month"]),
-                                           int(date["day"]))})
+                                           int(date["day"])),
+                    "author": soup.find(name="head").find("author").text})
+    # copy into parsed
     copytree(file, parsed / file.name, dirs_exist_ok=True)
     with open(parsed / file.name / "main.html", "w") as f:
         f.write(body_new)

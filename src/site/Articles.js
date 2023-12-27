@@ -1,4 +1,5 @@
 import ArticleList from "./articles/ArticleList.js";
+import ArticleDisplay from "./articles/ArticleDisplay.js";
 import React, { useState, useEffect } from "react";
 import { parse, load } from "./Parser.js";
 
@@ -25,7 +26,7 @@ function Articles() {
   const render = () => {
     if (articleMeta && article) {
       // check if undefined
-      return <div dangerouslySetInnerHTML={{ __html: article.innerHTML }}></div>;
+      return <ArticleDisplay header={articleMeta} main={article} />;
     }
     return <ArticleList updateMeta={updateArticleMeta} />;
   };

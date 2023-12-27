@@ -1,5 +1,9 @@
 function parse(element) {
-  // parse parse parse
+  // parse p elements
+  var coll = element.getElementsByTagName("p");
+  for (var i = 0; i < coll.length; i++) {
+    coll[i].className = "articleText";
+  }
   return element;
 }
 
