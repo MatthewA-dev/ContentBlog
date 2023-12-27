@@ -3,7 +3,7 @@ import React from "react";
 function ArticleCard(props) {
   const data = props.data;
   return (
-    <div className="articleCard" onClick={() => props.update(data.main)}>
+    <div className="articleCard" onClick={() => props.update(data)}>
       <div className="container">
         <div>
           <h1>{data.title}</h1>

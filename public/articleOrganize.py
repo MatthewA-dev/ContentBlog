@@ -29,11 +29,10 @@ for file in main.iterdir():
     for line in body:
         if (line == ""):
             continue
-        print(line)
-        body_new += f"<p>{line}</p>\n\n"
-    articles.append({"title": soup.find(name="head").find("title").text,
-                     "cover": str((file / soup.find(name="head").find("cover").attrs["src"])),
-                     "main": str(file / "main.html"),
+        body_new += f"<p>{line}</p>"
+    articles.append({"title": soup.find(name="head").find("title").text,  # swap their parent directories
+                     "cover": str((file.parents[1] / "articles_parsed" / file.name / soup.find(name="head").find("cover").attrs["src"])),
+                     "main": str(file.parents[1] / "articles_parsed" / file.name / "main.html"),
                      "date": datetime.date(int(date["year"]),
                                            int(date["month"]),
                                            int(date["day"]))})

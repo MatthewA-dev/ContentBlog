@@ -21,11 +21,10 @@ function ArticleList(props) {
     loadArticles(setArticles);
   }, []);
 
-  // todo: add loading / error
   return (
     <div>
       {articles.map((element, index) => (
-        <ArticleCard key={index} data={element} update={props.update} />
+        <ArticleCard key={index} data={element} update={props.updateMeta} />
       ))}
     </div>
   );

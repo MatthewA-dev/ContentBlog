@@ -2,31 +2,30 @@ import ArticleList from "./articles/ArticleList.js";
 import React, { useState, useEffect } from "react";
 import { parse, load } from "./Parser.js";
 
-const article = undefined;
-
 function Articles() {
   const [articleMeta, updateArticleMeta] = useState(undefined);
-
+  const [article, updateArticle] = useState(undefined);
   useEffect(() => {
     if (articleMeta) {
       load(articleMeta.main)
         .then((text) => {
-          article = document.createElement("div");
-          article.innerHTML = text;
-          article = parse(article);
+          var temp_article = document.createElement("div");
+          temp_article.innerHTML = text;
+          updateArticle(parse(temp_article));
         })
         .catch((err) => {
           console.log("Error " + err);
-          article = undefined;
+          updateArticle(undefined);
         });
     } else {
-      article = undefined;
+      updateArticle(undefined);
     }
-  }, [articleMeta]);
+  }, [article, articleMeta]);
 
   const render = () => {
-    if (isReadingArticle) {
-      return currentArticle;
+    if (articleMeta && article) {
+      // check if undefined
+      return <div dangerouslySetInnerHTML={{ __html: article.innerHTML }}></div>;
     }
     return <ArticleList updateMeta={updateArticleMeta} />;
   };

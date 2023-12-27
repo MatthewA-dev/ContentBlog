@@ -1,10 +1,5 @@
 function parse(element) {
-  // get rid of head and body elements
-  element.innerHTML = element.getElementByTagName("body").innerHTML;
-  const p = element.getElementsByTagName("p");
-  for (var i = 0; i <= p.length(); i++) {
-    p[i].className = "text";
-  }
+  // parse parse parse
   return element;
 }
 
