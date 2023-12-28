@@ -12,7 +12,7 @@ function Articles() {
         .then((text) => {
           var temp_article = document.createElement("div");
           temp_article.innerHTML = text;
-          updateArticle(parse(temp_article));
+          updateArticle(parse(temp_article, articleMeta));
         })
         .catch((err) => {
           console.log("Error " + err);
@@ -21,7 +21,7 @@ function Articles() {
     } else {
       updateArticle(undefined);
     }
-  }, [article, articleMeta]);
+  }, [articleMeta]);
 
   const render = () => {
     if (articleMeta && article) {

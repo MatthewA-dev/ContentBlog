@@ -10,7 +10,7 @@ function ArticleDisplay(props) {
         <h3 className="subheader">
           {header.author} • {header.date}
         </h3>
-        <img src={header.cover} className="coverImage" />
+        <img src={header.cover} className="coverImage" alt="cover" />
       </div>
       <div className="content" dangerouslySetInnerHTML={{ __html: main.innerHTML }}></div>;
     </div>

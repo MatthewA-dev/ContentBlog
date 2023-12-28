@@ -1,6 +1,6 @@
 from pathlib import Path
 from shutil import copy, copytree
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 import json
 import datetime
 
@@ -23,14 +23,17 @@ for file in main.iterdir():
     date = soup.find(name="head").find("date").attrs
 
     # parse individual line breaks as different paragraphs
-    body = soup.find(name="body").decode_contents()
-    body = body.replace("\r", "").split("\n\n")
+    body = soup.find(name="body")
     body_new = ""
-    for line in body:
-        if (line == ""):
-            continue
-        temp = line.replace('\n', '')
-        body_new += f"<p>{temp}</p>"
+    for child in body.contents:
+        if isinstance(child, str):
+            child = child.split("\n\n")
+            for line in child:
+                if (line.strip() == ""):
+                    continue
+                body_new += f"<p>{line.strip()}</p>"
+        elif isinstance(child, Tag):
+            body_new += str(child)
 
     # generate object
     articles.append({"title": soup.find(name="head").find("title").text,
