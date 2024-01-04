@@ -10,10 +10,47 @@
     Vivamus id laoreet dui, sagittis vulputate risus. Integer pellentesque sit amet tellus a facilisis. Proin in risus
     volutpat, volutpat libero ut, blandit leo. Nulla tincidunt est in euismod porttitor. Vivamus sem magna, dapibus
     vitae aliquet ac, mattis convallis nunc. Suspendisse quis pulvinar tellus, tincidunt porta ante. Integer orci
-    sapien, euismod eu volutpat id, hendrerit at turpis. In interdum est id purus gravida scelerisque. Curabitur
-    imperdiet lacus eros, porttitor maximus augue vehicula at. Vivamus non porttitor lectus. Morbi elit libero, varius
+    sapien, euismod eu volutpat id, hendrerit at turpis. <code>In interdum est id purus gravida scelerisque.</code>
+    Curabitur imperdiet lacus eros, porttitor maximus augue vehicula at. Vivamus non porttitor lectus. Morbi elit
+    libero, varius
     nec porttitor vel, consectetur lacinia diam. Maecenas dapibus non nulla ut interdum. Duis mollis arcu nisi, nec
     vehicula ipsum convallis vel. Quisque rutrum sed sapien ac ornare.
+
+    <img img-src="cover.png"></img>
+    \n
+    <code block class="python">
+for file in main.iterdir():
+    soup = BeautifulSoup((file / "main.html").read_text(), "html.parser")
+    date = soup.find(name="head").find("date").attrs
+
+    body = soup.find(name="body")
+    body_new = ""
+
+    bodytemp = body.decode_contents().split("\\n")
+    body = []
+    for x in bodytemp:
+        body += x.split("\n\n")
+    for line in body:
+        line = line.strip()
+        if (line == ""):
+            continue
+        linesoup = BeautifulSoup(line, "html.parser")
+        lineparsed = ""
+        hasText = False
+        for child in linesoup.contents:
+            if isinstance(child, str):
+                hasText = True
+                lineparsed += str(child).strip()
+            elif isinstance(child, Tag):
+                lineparsed += str(child)
+        print(line, hasText)
+        if (hasText):
+            temp = lineparsed.strip().replace('\n', '').replace('\r', '')
+            body_new = body_new + f"<p>{temp}</p>"
+        else:
+            body_new = body_new + lineparsed.strip().replace("\n",
+                                                            "").replace("\r", "")
+    </code>
 
     Nam sapien enim, placerat eget blandit et, ultricies in erat. Phasellus metus lacus, lobortis in eros id, ornare
     viverra justo. Nam euismod erat sed ante varius, non ultrices ipsum iaculis. Integer eget risus mauris. Nam bibendum

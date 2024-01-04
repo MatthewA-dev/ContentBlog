@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function ArticleDisplay(props) {
   const header = props.header;
@@ -12,7 +12,7 @@ function ArticleDisplay(props) {
         </h3>
         <img src={header.cover} className="coverImage" alt="cover" />
       </div>
-      <div className="content" dangerouslySetInnerHTML={{ __html: main.innerHTML }}></div>;
+      <div className="content" dangerouslySetInnerHTML={{ __html: main.innerHTML }}></div>
     </div>
   );
 }

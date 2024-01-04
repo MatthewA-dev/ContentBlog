@@ -8,6 +8,15 @@ import datetime
 # import all articles and save
 
 articles = []
+block_tags = [
+    "img",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+]
 
 # create new articles parsed directory
 main = Path("./articles")
@@ -22,18 +31,54 @@ for file in main.iterdir():
     soup = BeautifulSoup((file / "main.html").read_text(), "html.parser")
     date = soup.find(name="head").find("date").attrs
 
-    # parse individual line breaks as different paragraphs
+    # keep a temp body as a buffer for each paragraph. When the temp_body encounters something that breaks a paragraph (block tag or double newline), it flushes to body_new as a p object.
     body = soup.find(name="body")
     body_new = ""
+    temp_body = ""
+
     for child in body.contents:
         if isinstance(child, str):
-            child = child.split("\n\n")
-            for line in child:
+            ctemp = child.split("\\n")
+            lines = []
+            for c in ctemp:
+                lines += c.split("\n\n")
+            for line in lines:
                 if (line.strip() == ""):
                     continue
-                body_new += f"<p>{line.strip()}</p>"
+                line_new = line.strip().replace('\n', '')
+                body_new += f"<p>{temp_body + line_new}</p>"
+                temp_body = ""
         elif isinstance(child, Tag):
-            body_new += str(child)
+            if (child.has_attr("block") or child.name in block_tags):
+                body_new += f"<p>{temp_body}</p>"
+                body_new += str(child)
+                temp_body = ""
+            else:
+                temp_body += str(child)
+
+    # bodytemp = body.decode_contents().split("\\n")
+    # body = []
+    # for x in bodytemp:
+    #     body += x.split("\n\n")
+    # for line in body:
+    #     line = line.strip()
+    #     if (line == ""):
+    #         continue
+    #     linesoup = BeautifulSoup(line, "html.parser")
+    #     lineparsed = ""
+    #     hasText = False
+    #     for child in linesoup.contents:
+    #         if isinstance(child, str):
+    #             hasText = True
+    #             lineparsed += str(child).strip()
+    #         elif isinstance(child, Tag):
+    #             lineparsed += str(child)
+    #     if (hasText):
+    #         temp = lineparsed.strip().replace('\n', '').replace('\r', '')
+    #         body_new = body_new + f"<p>{temp}</p>"
+    #     else:
+    #         body_new = body_new + lineparsed.strip().replace("\n",
+    #                                                          "").replace("\r", "")
 
     # generate object
     articles.append({"title": soup.find(name="head").find("title").text,
