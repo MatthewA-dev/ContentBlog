@@ -1,9 +1,10 @@
-function parse(element, meta) {
+function parse(element, main) {
+  element.getElementsByTagName("header")[0].style.display = "none";
   // parse img elements
   var coll = element.getElementsByTagName("img");
   for (var i = 0; i < coll.length; i++) {
     coll[i].className = "articleImg";
-    coll[i].src = meta.main.split("\\").slice(0, -1).join("\\") + "\\" + coll[i].getAttribute("img-src"); // replaces main.html in the path with the src of the img
+    coll[i].src = main.split("\\").slice(0, -1).join("\\") + "\\" + coll[i].getAttribute("img-src"); // replaces main.html in the path with the src of the img
   }
   // parse code elements
 
@@ -34,9 +35,13 @@ function parse(element, meta) {
   // coll = element.getElementsByTagName("math");
   // for (var i = 0; i < coll.length; i++) {}
 
-  // // parse headers
-  // coll = element.getElementsByTagName("code");
-  // for (var i = 0; i < coll.length; i++) {}
+  // parse headers
+  for (var j = 1; j <= 6; j++) {
+    coll = element.getElementsByTagName("h" + j);
+    for (var i = 0; i < coll.length; i++) {
+      coll[i].className = "header-h" + j;
+    }
+  }
 
   return element;
 }

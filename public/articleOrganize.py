@@ -36,6 +36,9 @@ for file in main.iterdir():
     body_new = ""
     temp_body = ""
 
+    body_new += "<header>" + soup.find(name="head").decode_contents().replace(
+        "\n", "") + "</header>"
+
     for child in body.contents:
         if isinstance(child, str):
             ctemp = child.split("\\n")
@@ -50,7 +53,8 @@ for file in main.iterdir():
                 temp_body = ""
         elif isinstance(child, Tag):
             if (child.has_attr("block") or child.name in block_tags):
-                body_new += f"<p>{temp_body}</p>"
+                if (temp_body != ""):
+                    body_new += f"<p>{temp_body}</p>"
                 body_new += str(child)
                 temp_body = ""
             else:
