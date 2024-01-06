@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ArticleCard from "./ArticleCard.js";
 
 function loadArticles(setter) {
-  fetch("/articles.json")
+  fetch("./articles.json")
     .then(function (res) {
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);

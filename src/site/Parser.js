@@ -47,7 +47,7 @@ function parse(element, main) {
 }
 
 function load(url) {
-  return fetch("/" + url.replaceAll("\\", "/"))
+  return fetch("./" + url.replaceAll("\\", "/"))
     .then((response) => {
       return response.text();
     })
