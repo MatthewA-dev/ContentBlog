@@ -14,7 +14,7 @@ function App() {
   return (
     <div>
       <div className="full">
-        <Articles main={main} />;
+        <Articles main={main} />
       </div>
     </div>
   );

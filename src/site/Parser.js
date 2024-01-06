@@ -19,7 +19,7 @@ function parse(element, main) {
       e.innerHTML = e.innerHTML.replaceAll("<", "&lt");
       e.replaceWith(e, pre);
       pre.appendChild(e);
-      pre.className = "language-" + e.className;
+      pre.className = "";
     }
     coll[i].className = "language-" + coll[i].className;
   }

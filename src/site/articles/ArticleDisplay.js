@@ -1,12 +1,17 @@
 import React, { useEffect } from "react";
+import Prism from "prismjs";
 
 function ArticleDisplay(props) {
   const header = props.header;
   const main = props.main;
   const copy = () => {
-    navigator.clipboard.writeText(window.location.href.split("?")[0] + "?" + "main=" + encodeURIComponent(header.main));
+    navigator.clipboard.writeText(window.location.href.split("?")[0] + "?main=" + encodeURIComponent(header.main));
   };
-  console.log(main.getElementsByTagName("header")[0]);
+
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [main]);
+  // get meta information from file (incase we are redirected or linked directly from url)
   const title = header.title ?? main.getElementsByTagName("title")[0].text;
   const cover =
     header.cover ?? header.main.split("\\").slice(0, -1).join("\\") + "\\" + main.getElementsByTagName("cover")[0].getAttribute("src").replace("/", "\\");

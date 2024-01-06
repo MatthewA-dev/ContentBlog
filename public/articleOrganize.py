@@ -59,7 +59,7 @@ for file in main.iterdir():
                 temp_body = ""
             else:
                 temp_body += str(child)
-
+    body_new += f"<p>{temp_body}</p>"
     # bodytemp = body.decode_contents().split("\\n")
     # body = []
     # for x in bodytemp:
