@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# MatthewA-blog
+This is a blog that I made in React designed to be hosted on GitHub pages. It allows for articles to be written in HTML in Latex style, which involves using commands to achieve text effects. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Features
+- Access full list of all articles, sorted from latest to oldest
+- Able to put author, date, cover image, and title as header information
+- Able to link to specific articles using URLs
+- Text is automatically formatted into paragraphs
+- Able to insert images
+- Able to insert block and inline code using PrismJS
 
-## Available Scripts
+# Usage
+## Reading
+All articles will be stored on GibHub pages at the [following link](https://matthewa-dev.github.io/MatthewA-blog/)
 
-In the project directory, you can run:
+Clicking on a card will nagivate you to the coresponding article, and the back button will nagivate you back. 
 
-### `npm start`
+Links to articles will automatically link you to the coresponding article. For example, if you [click here](https://matthewa-dev.github.io/MatthewA-blog/?main=articles_parsed%5Carticle2%5Cmain.html), you will see an example article.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Writing
+Writing articles begins with the `articles` folder in the `public` directory. Creating a new directory here will correspond to a new article. The `main.html` file will be the main article.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Header information is stored in a `<head>` tag at the beginnning. Here is an example `<head>` tag
+```
+<head>
+    <title>Example Article</title>
+    <cover src="./cover.png" />
+    <date day=1 month=1 year=2024 />
+    <author>Matthew Aleshechkin</author>
+</head>
+```
+Note that `./cover.png` refers to a file stored locally within the article folder.
 
-### `npm test`
+Following that, comes the `<body>` tag which stores the main article. You may write any text here, and it will be formatted automatically. Double line breaks will create new paragraphs, as well as manually inserting `\n`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Here is an example image within an article:
+```
+<img img-src="test.png"></img>
+```
+And here is an example code block. Note that adding the `block` attribute to the code block will make it block code, and removing it will make it inline code.
+```
+<code block class="python">import foo from bar
+print("testing")
+for x in range(123):
+    print(x)</code>
+```
+The class name specifies the language according to the [PrismJS](https://prismjs.com/#supported-languages) docs. You do not need to add `language-` before the language.
 
-### `npm run build`
+Once finished, run `articleOrganize.py`, which will format your article into `articles_parsed` and add it to `articles.json`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This then allows it to be accessed by the app.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Known issues
+- PrismJS does not highlight code correctly
+- Article linking is not done using subdirectories, and is instead using URI parameters
+- Header information is not done up to HTML5 spec, as it uses invalid tag names
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Planned features
+- Support for Latex Math using MathJax
+- Better nagivation of the webpage using the back and forward buttons
+- Addition of Homepage
+- Ability to view a certain amount of cards at once, with buttons to nagivate between pages of articles to minimize scrolling.
