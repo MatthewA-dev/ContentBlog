@@ -59,4 +59,4 @@ This then allows it to be accessed by the app.
 - Support for Latex Math using MathJax
 - Better nagivation of the webpage using the back and forward buttons
 - Addition of Homepage
-- Ability to view a certain amount of cards at once, with buttons to nagivate between pages of articles to minimize scrolling.
+- Ability to view a certain amount of cards at once, with buttons to navigate between pages of articles to minimize scrolling.
