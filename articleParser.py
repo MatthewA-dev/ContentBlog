@@ -85,7 +85,7 @@ def parse(article):
             # assume beginning at first curly bracket, otherwise won't do anything
             # will end when reached end of input or reached closing curly bracket, setting i to be after it
             def parse_argument():
-                global i
+                nonlocal i
                 if(i >= len(text) or text[i] != '{'):
                     return ""
                 arg = ""
@@ -114,7 +114,10 @@ def parse(article):
                             i += 1
                         flush()
                         if(command == 'i'):
-                            content.append(ArticleObject(TokenType.IMAGE, {"path": arg1, "subtitle": arg2}))
+                            if(content != []):
+                                parsed_article_objects.append(content)
+                            parsed_article_objects.append(ArticleObject(TokenType.IMAGE, {"path": arg1, "subtitle": arg2}))
+                            content = []
                         elif(command == 'f'):
                             content.append(ArticleObject(TokenType.TEXT, {"content": arg2, "format": arg1}))
                     else:
@@ -140,7 +143,8 @@ def parse(article):
                     parsed_content += text[i]
                 i += 1
             flush()
-            parsed_article_objects.append(content)
+            if(content != []):
+                parsed_article_objects.append(content)
     
     # serialize all classes
     def serialize(article_objects):

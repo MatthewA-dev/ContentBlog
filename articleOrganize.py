@@ -24,7 +24,8 @@ for article_dir in main.iterdir():
         "month" : "1",
         "day" : "1",
         "cover" : "",
-        "article" : None
+        "article" : None,
+        "directory" : article_dir.name
     }
     # open and parse the metadata file
     metadata_raw = (article_dir / "article.meta").read_text()
@@ -63,6 +64,8 @@ for article_dir in main.iterdir():
     copytree(article_dir,parsed / article_dir.name, dirs_exist_ok=True)
     with open(parsed / article_dir.name / metadata["article"], 'w') as f:
         f.write(article_contents)
+    with open(parsed / article_dir.name / "article.meta", "w") as f:
+        f.write(json.dumps(metadata))
 
 def key(element):
     return str(element["year"]) + "-" + str(element["month"]) + "-" + str(element["day"])
