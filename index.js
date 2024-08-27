@@ -97,6 +97,10 @@ function renderArticle(article, parent_element){
             }
 
             parent_element.appendChild(main)
+            Prism.highlightAll()
+            MathJax.typeset()
+
+            
         })
     })
 }
@@ -109,19 +113,29 @@ function createComponent(component, directory){
         if(type === "TEXT"){
             return document.createTextNode(content)
         }else if(type === "MATH"){
-            let math = document.createElement('math')
-            math.innerText = content
+            let math = document.createElement('span')
+            math.textContent = content
             if(data["inline"]){
-                math.className = "inline"
+                math.textContent = "\\(" + math.textContent + "\\)"
+            }else {
+                math.textContent = "$$" + math.textContent + "$$"
             }
             return math
         }else if(type === "CODE"){
-            let code = document.createElement('code')
-            code.innerText = content
+            content = content.replace("&", "&amp;").replace("<", "&lt;")
             if(data["inline"]){
-                code.className = "inline"
+                let code = document.createElement('code')
+                code.textContent = content
+                code.className = "language-none"
+                return code
+            }else {
+                let code = document.createElement('pre')
+                let innerCode = document.createElement('code')
+                innerCode.className = data["language"]
+                innerCode.textContent = content
+                code.appendChild(innerCode)
+                return code
             }
-            return code
         }else if(type === "HEADER"){
             let depth = data["depth"]
             if(!data["depth"]){
