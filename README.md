@@ -48,7 +48,7 @@ Create a line beginning with one or more hashes in order to create a header:
 ```
 ### Code
 Code is parsed using backticks. Inline code uses single back ticks, while block code begins a line with three backticks followed by the language. Refer to the [PrismJS docs](https://prismjs.com/#supported-languages) for the language name.
-``
+````
 `print("Hello world!")`
 
 ```language-python
@@ -60,7 +60,7 @@ def fib(n):
     else:
         return fib(n - 1) + fib(n - 2)
 ```
-``
+````
 ### Math
 Similarly to code, use single dollar signs for inline math and begin a line with double dollar signs for block math.
 ```
