@@ -64,6 +64,7 @@ body {
   max-height: 100%;
   max-width: 25%;
   object-fit: cover;
+  margin-right: 5%;
 }
 .container {
   max-height: 100%;
@@ -82,6 +83,19 @@ body {
 .coverImage {
   max-width: 75%;
 }
+
+.img {
+  max-width: 75%;
+}
+
+.imgSubtitle {
+  font-size: 1em;
+}
+
+.imgContainer {
+  text-align: center;
+}
+
 
 .title {
   font-size: 4em;

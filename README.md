@@ -1,62 +1,86 @@
-# MatthewA-blog
-This is a blog that I made in React designed to be hosted on GitHub pages. It allows for articles to be written in HTML in Latex style, which involves using commands to achieve text effects. 
+# Content Blog
+This is a blog designed to be hosted on GitHub pages. It allows for articles to be written in a text file, which is parsed into JSON to be displayed on the blog after publishing it to Github pages.
 
 # Features
 - Access full list of all articles, sorted from latest to oldest
 - Able to put author, date, cover image, and title as header information
-- Able to link to specific articles using URLs
+- Articles can be linked using URLs
 - Text is automatically formatted into paragraphs
-- Able to insert images
-- Able to insert block and inline code using PrismJS
+- Images
+- Block and inline code, highlighted using PrismJS
+- Block and inline math, displayed using MathJax
 
 # Usage
 ## Reading
-All articles will be stored on GibHub pages at the [following link](https://matthewa-dev.github.io/MatthewA-blog/)
+All articles will be stored on GibHub pages at the [following link](https://matthewa-dev.github.io/ContentBlog/)
 
 Clicking on a card will nagivate you to the coresponding article, and the back button will nagivate you back. 
 
 Links to articles will automatically link you to the coresponding article. For example, if you [click here](https://matthewa-dev.github.io/MatthewA-blog/?main=articles_parsed%5Carticle2%5Cmain.html), you will see an example article.
 
 ## Writing
-Writing articles begins with the `articles` folder in the `public` directory. Creating a new directory here will correspond to a new article. The `main.html` file will be the main article.
+Writing articles begins with the `articles` folder. Creating a new directory here will correspond to a new article.
 
-Header information is stored in a `<head>` tag at the beginnning. Here is an example `<head>` tag
+To begin, write a header file titled `article.meta` in order to specify its metadata. Here is an example `article.meta`
+
 ```
-<head>
-    <title>Example Article</title>
-    <cover src="./cover.png" />
-    <date day=1 month=1 year=2024 />
-    <author>Matthew Aleshechkin</author>
-</head>
+title = Example Article
+author = Example Author
+year = 2024
+month = 8
+day = 27
+cover = cover.png
+article = main
 ```
-Note that `./cover.png` refers to a file stored locally within the article folder.
 
-Following that, comes the `<body>` tag which stores the main article. You may write any text here, and it will be formatted automatically. Double line breaks will create new paragraphs, as well as manually inserting `\n`.
+`cover.png` refers to a file called `cover.png` which is in the article directory, and `main` refers to a file called `main` in the article directory. You can omit the spaces between the equals sign, or you can write an empty line (`title = `) in order to set something as empty. Any articles with a missing article main file will not be displayed.
 
-Here is an example image within an article:
+
+### Headers
+Create a line beginning with one or more hashes in order to create a header:
 ```
-<img img-src="test.png"></img>
+# This is an h1
+## This is an h2
+### This is an h3
+#### This is an h4
+##### This is an h5
+###### This is an h6
 ```
-And here is an example code block. Note that adding the `block` attribute to the code block will make it block code, and removing it will make it inline code.
+### Code
+Code is parsed using backticks. Inline code uses single back ticks, while block code begins a line with three backticks followed by the language. Refer to the [PrismJS docs](https://prismjs.com/#supported-languages) for the language name.
+``
+`print("Hello world!")`
+
+```language-python
+def fib(n):
+    if (n <= 0):
+        return 0
+    elif(n == 1):
+        return 1
+    else:
+        return fib(n - 1) + fib(n - 2)
 ```
-<code block class="python">import foo from bar
-print("testing")
-for x in range(123):
-    print(x)</code>
+``
+### Math
+Similarly to code, use single dollar signs for inline math and begin a line with double dollar signs for block math.
 ```
-The class name specifies the language according to the [PrismJS](https://prismjs.com/#supported-languages) docs. You do not need to add `language-` before the language.
+$x = \frac{-b \pm \sqrt{b^2 - 4ac}} {2a}$
 
-Once finished, run `articleOrganize.py`, which will format your article into `articles_parsed` and add it to `articles.json`.
+$$
+\int^a_b x^2dx = \left[\frac{x^3}{3}\right]^b_a = \frac{b^3}{3} - \frac {a^3}{3}
+$$
+```
+### Images
+Use `\i{}{}` to include images. The content of the first curly bracket refers to the image location, while the second refers to the subtitle of the image.
+```
+\i{example.png}{An example image}
+```
 
-This then allows it to be accessed by the app.
+### Text
+Any text which is not parsed by the above rules is treated as normal text. Characters can be escaped using a backslash (`\`)
+```
+Lorem ipsum dolor sit amet, consectetur...
+\# <- If we want a hash at the beginning of the line
+```
 
-# Known issues
-- PrismJS does not highlight code correctly
-- Article linking is not done using subdirectories, and is instead using URI parameters
-- Header information is not done up to HTML5 spec, as it uses invalid tag names
-
-# Planned features
-- Support for Latex Math using MathJax
-- Better nagivation of the webpage using the back and forward buttons
-- Addition of Homepage
-- Ability to view a certain amount of cards at once, with buttons to navigate between pages of articles to minimize scrolling.
+Once finished, run `articleOrganize.py`, which will format your article into `articles_parsed` and add it to `articles.json`. You can then publish it to Github Pages.

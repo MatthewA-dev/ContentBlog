@@ -84,8 +84,9 @@ function renderArticle(article, parent_element){
             header.appendChild(subtitle)
             
             let cover = document.createElement('img')
-            cover.src = metadata["cover"]
+            cover.src = "articles_parsed/" + metadata["directory"] + "/" + metadata["cover"]
             cover.alt = "cover"
+            cover.className = "coverImage"
             header.appendChild(cover)
 
             parent_element.appendChild(header)
@@ -122,7 +123,7 @@ function createComponent(component, directory){
             }
             return math
         }else if(type === "CODE"){
-            content = content.replace("&", "&amp;").replace("<", "&lt;")
+            // content = content.replace("&", "&amp;").replace("<", "&lt;")
             if(data["inline"]){
                 let code = document.createElement('code')
                 code.textContent = content
@@ -146,9 +147,17 @@ function createComponent(component, directory){
             header.innerText = content
             return header
         }else if(type === "IMAGE"){
+            let container = document.createElement('div')
+            container.className = "imgContainer"
             let img = document.createElement('img')
             img.src = "articles_parsed/" + directory + "/" + data["path"]
-            return img
+            img.className = "img"
+            let subtitle = document.createElement('p')
+            subtitle.className = "imgSubtitle"
+            subtitle.textContent = data["subtitle"]
+            container.appendChild(img)
+            container.appendChild(subtitle)
+            return container
         }
     }else{
         let text = document.createElement('p')
@@ -186,7 +195,7 @@ function createCard(metadata){
     card.className = "articleCard"
     
     let img = document.createElement('img')
-    img.src = metadata["cover"]
+    img.src = "articles_parsed/" + metadata["directory"] + "/" + metadata["cover"]
     img.className = "coverCard"
     
     let container = document.createElement('div')

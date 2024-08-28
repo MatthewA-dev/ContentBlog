@@ -1,0 +1,30 @@
+# This is an h1
+## This is an h2
+### This is an h3
+#### This is an h4
+##### This is an h5
+###### This is an h6
+
+This is how text looks.
+
+This is how longer text looks. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+If you want, we can add code inline with the text: `print("Hello world!")`. We can also add block code as well. Here is some example python code, highlighted with Prismjs:
+```language-python
+def fib(n):
+    if (n <= 0):
+        return 0
+    elif(n == 1):
+        return 1
+    else:
+        return fib(n - 1) + fib(n - 2)
+```
+
+We can also add math: $x = \frac{-b \pm \sqrt{b^2 - 4ac}} {2a}$. Similarly, we can have block math as well
+$$
+\int^a_b x^2dx = \left[\frac{x^3}{3}\right]^b_a = \frac{b^3}{3} - \frac {a^3}{3}
+$$
+
+Finally, we can add images to this article
+
+\i{example.png}{This is a subtitle for this image}
