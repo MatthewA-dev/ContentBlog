@@ -16,7 +16,7 @@ All articles will be stored on GibHub pages at the [following link](https://matt
 
 Clicking on a card will nagivate you to the coresponding article, and the back button will nagivate you back. 
 
-Links to articles will automatically link you to the coresponding article. For example, if you [click here](https://matthewa-dev.github.io/MatthewA-blog/?main=articles_parsed%5Carticle2%5Cmain.html), you will see an example article.
+Links to articles will automatically link you to the coresponding article. For example, if you [click here](https://matthewa-dev.github.io/ContentBlog/?article=articlejson), you will see an example article.
 
 ## Writing
 Writing articles begins with the `articles` folder. Creating a new directory here will correspond to a new article.
